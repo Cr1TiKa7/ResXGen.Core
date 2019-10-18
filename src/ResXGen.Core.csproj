@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Cr1TiKa7</Authors>
+    <Company />
+    <Description>A simple library to read and write resource files.</Description>
+    <Version>1.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Cr1TiKa7/ResXGen.Core</RepositoryUrl>
+    <PackageIconUrl>https://i.imgur.com/pO5zjw8.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resource.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resource.en-US.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
