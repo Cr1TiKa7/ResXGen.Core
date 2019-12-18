@@ -18,3 +18,5 @@ jobs:
       run: dotnet pack --configuration Release
     - name: Publish NuGet
       uses: rohith/publish-nuget@v1        
+      with:
+        project_dir: ./src
