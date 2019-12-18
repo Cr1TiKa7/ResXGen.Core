@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Cr1TiKa7</Authors>
+    <Authors>Cr1TiKa7, Andrey Zakharov</Authors>
     <Company />
     <Description>A simple library to read and write resource files.</Description>
-    <Version>1.0.1</Version>
+    <Version>1.1.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/Cr1TiKa7/ResXGen.Core</RepositoryUrl>

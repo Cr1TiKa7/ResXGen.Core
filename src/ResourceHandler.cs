@@ -11,19 +11,27 @@ namespace ResXGen.Core
     public class ResourceHandler
     {
         private readonly XmlSerializer _serializer = new XmlSerializer(typeof(ResXRoot));
+
         /// <summary>
         /// Reads the given .resx file.
         /// </summary>
         /// <param name="filePath">Path to the .resx file.</param>
         /// <returns>An object which represents the .resx file.</returns>
-        public ResXFile ReadResXFile(string filePath)
-        {
+        public ResXFile ReadResXFile(string filePath) {
             if (!File.Exists(filePath)) throw new FileNotFoundException($"The file '{filePath}' does not exist. Please check your given path.");
+            return ReadResXFile(File.OpenRead(filePath));
+        }
 
+        /// <summary>
+        /// Reads .resx file from stream.
+        /// </summary>
+        /// <param name="file"><see cref="Stream"/> with .resx data.</param>
+        /// <returns>An object which represents the .resx file.</returns>
+        public ResXFile ReadResXFile(Stream file) {
             ResXFile ret;
             try
             {
-                using (var streamReader = new StreamReader(filePath))
+                using (var streamReader = new StreamReader(file))
                 {
                     var fileContent = _serializer.Deserialize(streamReader);
                     ret = new ResXFile((ResXRoot)fileContent);
@@ -42,12 +50,20 @@ namespace ResXGen.Core
         /// </summary>
         /// <param name="resxFile">The resource file object.</param>
         /// <param name="filePath">The path where the resource file will be saved to.</param>
-        public void SaveResXFile(ResXFile resxFile, string filePath)
-        {
-            if (resxFile == null) throw new ArgumentNullException(nameof(resxFile));
+        public void SaveResXFile(ResXFile resxFile, string filePath) {
             if (filePath == null) throw new ArgumentNullException(nameof(filePath));
+        }
+        
+        /// <summary>
+        /// Saves the resource file to the given path.
+        /// </summary>
+        /// <param name="resxFile">The resource file object.</param>
+        /// <param name="file">The <see cref="Stream"/> where the resource data will be saved to.</param>
+        public void SaveResXFile(ResXFile resxFile, Stream file) {
+            if (resxFile == null) throw new ArgumentNullException(nameof(resxFile));
+            if (file == null) throw new ArgumentNullException(nameof(file));
 
-            using (var streamWriter = new StreamWriter(filePath))
+            using (var streamWriter = new StreamWriter(file))
             {
                 _serializer.Serialize(streamWriter, resxFile.GetResXRoot());
             }
