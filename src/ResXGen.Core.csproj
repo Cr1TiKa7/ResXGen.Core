@@ -5,7 +5,7 @@
     <Authors>Cr1TiKa7, Andrey Zakharov</Authors>
     <Company />
     <Description>A simple library to read and write resource files.</Description>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/Cr1TiKa7/ResXGen.Core</RepositoryUrl>
     <PackageIconUrl>https://i.imgur.com/pO5zjw8.png</PackageIconUrl>
