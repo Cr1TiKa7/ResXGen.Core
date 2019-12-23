@@ -1,0 +1,24 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build with dotnet
+      working-directory: ./src
+      run: dotnet pack --configuration Release -o .
+    - name: Install NuGet client
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Add private GitHub registry to NuGet
+      run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/killwort/index.json -Username killwort -Password ${{ secrets.GITHUB_TOKEN }}
+    - name: Push generated package to GitHub registry
+      run: nuget push .\src\*.nupkg -Source "GPR" -SkipDuplicate
