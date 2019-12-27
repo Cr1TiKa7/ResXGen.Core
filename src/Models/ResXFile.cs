@@ -49,8 +49,10 @@ namespace ResXGen.Core.Models
 
             foreach (var data in _resxRoot.Data)
             {
-                if (data.Space.Equals("preserve"))
+                if (data.Space!=null && data.Space.Equals("preserve"))
                     ret.Add(new StringResource(data.Name, data.Value, data.Comment));
+                else 
+                    ret.Add(new StringResource(data.Name, data.Value?.Trim(), data.Comment));
             }
             return ret;
         }
@@ -100,7 +102,9 @@ namespace ResXGen.Core.Models
 
             foreach (var data in _resxRoot.Data)
             {
-                if (!data.Space.Equals("preserve"))
+                if (data.Space==null || !data.Space.Equals("preserve"))
+                    ret.Add(new FileResource(data.Name, data.Value?.Trim(), data.Type));
+                else
                     ret.Add(new FileResource(data.Name, data.Value, data.Type));
             }
             return ret;
